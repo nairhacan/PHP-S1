@@ -1,0 +1,46 @@
+import graphviz
+
+# Membuat diagram flowchart
+flowchart = graphviz.Digraph(format='png')
+flowchart.attr(rankdir='TB', size='8')
+
+# Node utama
+flowchart.node('start', 'Mulai', shape='circle')
+flowchart.node('fitur', 'Tentukan Fitur:\n1. Tarik Saldo\n2. Simpan Saldo\n3. Pembayaran', shape='box')
+
+# Cabang berdasarkan fitur
+flowchart.node('tarik', 'Tarik Saldo:\nKurangi $_SESSION["saldo"]', shape='box')
+flowchart.node('simpan', 'Simpan Saldo:\nTambah $_SESSION["saldo"]', shape='box')
+flowchart.node('bayar', 'Pilih Pembayaran:\n1. Pulsa (5000)\n2. Listrik (10000)\n3. Internet (15000)', shape='box')
+
+# Cabang dari pembayaran
+flowchart.node('pulsa', 'Kurangi 5000 dari saldo', shape='box')
+flowchart.node('listrik', 'Kurangi 10000 dari saldo', shape='box')
+flowchart.node('internet', 'Kurangi 15000 dari saldo', shape='box')
+
+# Riwayat transaksi
+flowchart.node('riwayat', 'Tampilkan Riwayat Transaksi\n(dalam bentuk tabel)', shape='box')
+flowchart.node('end', 'Selesai', shape='circle')
+
+# Menghubungkan node
+flowchart.edges([('start', 'fitur')])
+flowchart.edge('fitur', 'tarik', label='Pilih Tarik')
+flowchart.edge('fitur', 'simpan', label='Pilih Simpan')
+flowchart.edge('fitur', 'bayar', label='Pilih Pembayaran')
+
+flowchart.edge('tarik', 'riwayat')
+flowchart.edge('simpan', 'riwayat')
+
+flowchart.edge('bayar', 'pulsa', label='Pulsa')
+flowchart.edge('bayar', 'listrik', label='Listrik')
+flowchart.edge('bayar', 'internet', label='Internet')
+
+flowchart.edge('pulsa', 'riwayat')
+flowchart.edge('listrik', 'riwayat')
+flowchart.edge('internet', 'riwayat')
+
+flowchart.edge('riwayat', 'end')
+
+flowchart.render('/mnt/data/flowchart_atm')
+
+'/mnt/data/flowchart_atm.png'

@@ -1,0 +1,8 @@
+.tengah {
+    justify-content: center;
+}
+.bc {
+    background-color: red;
+    border-color: blue;
+    align-items: center;
+}

@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1c1c1c;
+    color: white;
+}
+
+.container {
+    width: 80%;
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.lyrics {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.line {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1.5s forwards;
+}
+
+.line.timestamp {
+    color: #3498db;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes showLyrics {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/* Menambahkan warna kuning saat lirik aktif */
+.line.active {
+    color: #f39c12; /* Warna kuning */
+    font-weight: bold;
+    transition: color 0.5s ease, font-weight 0.5s ease;
+}
